@@ -11,16 +11,12 @@
       </template>
     </div>
     <div class="flex flex-col gap-1">
-      <label for="in">Upload input file:</label>
-      <input id="in" type="file"/>
-    </div>
-    <div class="flex flex-col gap-1">
       <label for="acc">Acceptance type:</label>
       <select name="Select" class="border border-black border-2 dark:border-white rounded-md p-1" id="acc">
         <option value="bin">Binary string</option>
         <option value="diff">Spike difference</option>
       </select>
     </div>
-    <button class="bg-primary py-1 rounded-md hover:scale-105 transition-all">Judge</button>
+    <button class="bg-primary py-1 rounded-md text-white hover:scale-105 transition-all">Judge</button>
   </div>
 </template>
