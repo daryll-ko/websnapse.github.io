@@ -1,20 +1,24 @@
-import { watch, reactive } from 'vue';
-import graph from './graph';
-import sample from '../data.json';
-import { exportSystem } from '@/graph/utils/parse-system';
-import { useStorage } from '@vueuse/core';
+import { watch, reactive } from "vue";
+import graph from "./graph";
+import sample from "../data.json";
+import { exportSystem } from "@/graph/utils/parse-system";
+import { useStorage } from "@vueuse/core";
 
 const system = reactive({
-  mode: 'pseudorandom',
+  mode: "pseudorandom",
   states: [],
   configuration: [],
   speed: 1.5,
   tick: 0,
   history: [],
-  backup: useStorage('system', sample),
+  backup: useStorage("system", sample),
   reset: null,
   halted: true,
   ws: null,
+
+  inputs: ["", "", "", "", ""],
+  interp: "",
+  verdicts: ["?", "?", "?", "?", "?"],
 
   data() {
     return graph.value ? exportSystem(graph.value) : this.backup;
@@ -29,10 +33,10 @@ watch(
   (newDuration) => {
     if (system.ws && system.ws.readyState === WebSocket.OPEN) {
       system.ws.send(
-        JSON.stringify({ cmd: 'speed', speed: parseInt(newDuration) })
+        JSON.stringify({ cmd: "speed", speed: parseInt(newDuration) }),
       );
     }
-  }
+  },
 );
 
 export default system;

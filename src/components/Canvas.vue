@@ -139,6 +139,8 @@ onMounted(() => {
           JSON.stringify({
             data: system.data(),
             speed: parseInt(system.speed),
+            interp: system.interp,
+            inputs: system.inputs,
           })
         );
       };
@@ -175,6 +177,9 @@ onMounted(() => {
           case 'error':
             navbar.running = false;
             $toast.error(replaceInlineMath(data.message), { position: 'top-right' });
+            break;
+          case 'judge':
+            system.verdicts = data.verdicts;
             break;
           default:
             break;
