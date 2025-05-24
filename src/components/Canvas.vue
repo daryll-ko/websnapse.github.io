@@ -9,6 +9,7 @@
   />
   <SimulationControls @reset="reset" />
   <Tick />
+  <String />
   <div
     id="mountNode"
     class="flex items-start justify-center w-screen h-screen overflow-hidden"
@@ -22,6 +23,7 @@ import { onMounted, ref, watch } from 'vue';
 import Toolbar from '@/components/Toolbar.vue';
 import Dialogs from '@/components/Dialogs.vue';
 import Tick from '@/components/Tick.vue';
+import String from '@/components/String.vue';
 import ViewControls from '@/components/ViewControls.vue';
 import SimulationControls from '@/components/SimulationControls.vue';
 
