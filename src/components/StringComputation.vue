@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute right-10 top-10 w-72 flex flex-col gap-6 dark:text-white text-black border dark:border-none border-1 dark:bg-light/10 p-4 rounded-md">
+  <div class="absolute right-10 top-10 w-72 flex flex-col gap-6 dark:text-white text-black border dark:border-none border-1 bg-light dark:bg-light/10 p-4 rounded-md z-30">
     <div class="flex flex-col gap-1">
       <h1>String Computation</h1>
       <hr class="border border-black rounded-md dark:border-white" />
