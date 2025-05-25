@@ -4,8 +4,8 @@
       <h1>String Computation</h1>
       <hr class="border border-black rounded-md dark:border-white" />
     </div>
-    <div class="grid grid-cols-2 gap-3">
-      <template v-for="i in 5">
+    <div class="grid grid-cols-2 gap-3 max-h-[190px] overflow-y-scroll">
+      <template v-for="i in system.inputs.length">
         <input v-model="system.inputs[i-1]" class="border dark:border-white border-1 rounded-md px-2"></input>
         <div v-if="system.verdicts[i-1] === 'Accepted'"><span class="text-green-600">{{system.verdicts[i-1]}}</span></div>
         <div v-else-if="system.verdicts[i-1] === 'Rejected'"><span class="text-red-400">{{system.verdicts[i-1]}}</span></div>
@@ -14,7 +14,7 @@
     </div>
     <div class="flex flex-col gap-1">
       <label for="fil">Text file:</label>
-      <input type="file"/>
+      <input type="file" @change="onFile" accept=".txt" />
     </div>
     <div class="flex flex-col gap-1">
       <label for="acc">Acceptance type:</label>
@@ -30,6 +30,17 @@
 
 <script setup>
 import system from "@/stores/system";
+import { ref } from 'vue';
+
+const onFile = (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => {
+    system.inputs = reader.result.split('\n').filter(s => s.length);
+    system.verdicts = new Array(system.inputs.length).fill('?');
+  }
+}
 
 const judge = async () => {
   if (system.halted || system.reset) {
@@ -37,5 +48,6 @@ const judge = async () => {
       `${import.meta.env.VITE_WS_API}/ws/compute`
     );
   }
+  system.verdicts = new Array(system.inputs.length).fill("Loading...");
 }
 </script>
