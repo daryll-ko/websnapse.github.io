@@ -4,6 +4,8 @@ import sample from "../data.json";
 import { exportSystem } from "@/graph/utils/parse-system";
 import { useStorage } from "@vueuse/core";
 
+const N = 10;
+
 const system = reactive({
   mode: "pseudorandom",
   states: [],
@@ -16,9 +18,9 @@ const system = reactive({
   halted: true,
   ws: null,
 
-  inputs: ["", "", "", "", ""],
+  inputs: new Array(N).fill(""),
   interp: "",
-  verdicts: ["?", "?", "?", "?", "?"],
+  verdicts: new Array(N).fill("?"),
 
   data() {
     return graph.value ? exportSystem(graph.value) : this.backup;
