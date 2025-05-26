@@ -24,13 +24,13 @@
         <option value="dif">Spike difference</option>
       </select>
     </div>
-    <button class="bg-primary py-1 rounded-md text-white hover:scale-105 transition-all" @click="judge">Judge</button>
+    <button class="bg-primary py-1 rounded-md text-white hover:scale-105 disabled:bg-primary/50 disabled:hover:scale-100 transition-all" :disabled="navbar.running" @click="judge">Judge</button>
   </div>
 </template>
 
 <script setup>
 import system from "@/stores/system";
-import { ref } from 'vue';
+import navbar from "@/stores/navbar";
 
 const onFile = (e) => {
   const file = e.target.files[0];
